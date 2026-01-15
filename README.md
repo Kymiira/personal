@@ -1,3 +1,1 @@
-# personal projects
-# links to cool stuff
-# other things i guess
+#HTML index: https://kymiira.github.io/personal/public/html/index.html
