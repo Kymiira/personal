@@ -1,34 +1,45 @@
 <head>
     <link ref="stylesheet" href="./exptr.css">
     <script>
-        const el = {
-            name: document.getElementById('myName'),
-            number: document.getElementById('myNumber'),
-            output: document.getElementById('myOutput'),
-            form: document.getElementById('myForm')
-        }
-
-        const entries = [];
-
-        const addEntry = (e) => {
-            e.preventDefault();
-
-            const entry = {
-                name: el.name.value,
-                number: Number(el.number.value),
-                timestamp: Date.now()
+        document.addEventListener('DOMContentLoaded', () => {
+            const el = {
+                name: document.getElementById('myName'),
+                number: document.getElementById('myNumber'),
+                output: document.getElementById('myOutput'),
+                form: document.getElementById('myForm')
             }
 
-            if (entry.name && !isNaN(entry.number)) {
-                entries.push(entry);
-                render();
-            }
-        }
+            const entries = [];
 
-        const render = () => {
-            el.output.innerText = JSON.stringify(entries, null, 2);
-        }
-        el.form.addEventListener('submit', addEntry);
+            const render = () => {
+                const total = entries.reduce((acc, curr) => acc + curr.number, 0)
+
+                el.output.innerHTML = `
+                    <pre>${JSON.stringify(entries, null, 2)}</pre>
+                    <strong>Total: $${total.toFixed(2)}</strong>
+                `;
+            }
+
+            const addEntry = (e) => {
+                e.preventDefault();
+
+                const entry = {
+                    name: el.name.value,
+                    number: parseFloat(el.number.value),
+                    timestamp: new Date().toLocaleTimeString()
+                }
+
+                if (entry.name && !isNaN(entry.number)) {
+                    entries.push(entry);
+                    render();
+                    el.form.reset()
+                    el.name.focus()
+                }
+            }
+
+            el.form.addEventListener('submit', addEntry);
+        })
+
     </script>
 </head>
 <body>
@@ -39,6 +50,7 @@
         <form id="myForm">
             <input id="myName" type="text" placeholder="item name"><br>
             <input id="myNumber" type="number" placeholder="item cost"><br>
+            <hr>
             <span id="myOutput"></span>
         </form>
         
