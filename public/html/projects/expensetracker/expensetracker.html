@@ -18,6 +18,7 @@
                     <pre>${JSON.stringify(entries, null, 2)}</pre>
                     <strong>Total: $${total.toFixed(2)}</strong>
                 `;
+                console.log('render, work');
             }
 
             const addEntry = (e) => {
@@ -34,7 +35,9 @@
                     render();
                     el.form.reset()
                     el.name.focus()
+                    console.log('if, work');
                 }
+                console.log('addEntry, work');
             }
 
             el.form.addEventListener('submit', addEntry);
