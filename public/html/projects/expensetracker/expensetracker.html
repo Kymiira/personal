@@ -1,21 +1,34 @@
 <head>
-    <link ref="stylesheet" href="../../../css/expensetracker.css">
+    <link ref="stylesheet" href="./exptr.css">
     <script>
-        item = {
+        const el = {
             name: document.getElementById('myName'),
-            number: document.getElementById('myNumber')
-        };
-        output = document.getElementById('myOutput');
-        array = {
-            tempName: [],
-            tempNum: [],
-            tempTotal: []
-        };
-        
-        function toArray(valType, val) {
-            if (valType = )
+            number: document.getElementById('myNumber'),
+            output: document.getElementById('myOutput'),
+            form: document.getElementById('myForm')
         }
-        item.name.addEventListener('submit', toArray);
+
+        const entries = [];
+
+        const addEntry = (e) => {
+            e.preventDefault();
+
+            const entry = {
+                name: el.name.value,
+                number: Number(el.number.value),
+                timestamp: Date.now()
+            }
+
+            if (entry.name && !isNaN(entry.number)) {
+                entries.push(entry);
+                render();
+            }
+        }
+
+        const render = () => {
+            el.output.innerText = JSON.stringify(entries, null, 2);
+        }
+        el.form.addEventListener('submit', addEntry);
     </script>
 </head>
 <body>
@@ -23,8 +36,11 @@
         <h1>Expense Tracker</h1>
     </header>
     <main>
-        <input id="myName" type="text" placeholder="item name"><br>
-        <input id="myNumber" type="number" placeholder="item cost"><br>
-        <span id="myOutput"></span>
+        <form id="myForm">
+            <input id="myName" type="text" placeholder="item name"><br>
+            <input id="myNumber" type="number" placeholder="item cost"><br>
+            <span id="myOutput"></span>
+        </form>
+        
     </main>
 </body>
