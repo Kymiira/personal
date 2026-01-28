@@ -6,6 +6,7 @@
                 name: document.getElementById('myName'),
                 number: document.getElementById('myNumber'),
                 output: document.getElementById('myOutput'),
+                submite: document.getElementById('mySubmit'),
                 form: document.getElementById('myForm')
             }
 
@@ -41,6 +42,7 @@
             }
 
             el.form.addEventListener('submit', addEntry);
+            el.submit.addEventListener('submit', addEntry);
         })
 
     </script>
@@ -53,6 +55,7 @@
         <form id="myForm">
             <input id="myName" type="text" placeholder="item name"><br>
             <input id="myNumber" type="number" placeholder="item cost"><br>
+            <input id="mySubmit" type="button" placeholder="submit" value="submit"><br>
             <hr>
             <span id="myOutput"></span>
         </form>
