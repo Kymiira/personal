@@ -15,12 +15,19 @@
             const render = () => {
                 const total = entries.reduce((acc, curr) => acc + curr.number, 0)
 
+                const listHtml = entries.map(entry => `
+                    <div class="entry-item">
+                        <strong>${entry.name}</strong>: $${entry.number.toFixed(2)}
+                        <small style="color: gray;">(${entry.timestamp})</small>
+                    </div>
+                `).join('');
+
                 el.output.innerHTML = `
-                    <pre>${JSON.stringify(entries, null, 2)}</pre>
+                    <div class="entry-list">$listHtml || '<em>No entries yet.</em>'}</div>
+                    <hr>
                     <strong>Total: $${total.toFixed(2)}</strong>
                 `;
-                console.log('render, work');
-            }
+            };
 
             const addEntry = (e) => {
                 e.preventDefault();
